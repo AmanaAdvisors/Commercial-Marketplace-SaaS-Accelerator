@@ -1,3 +1,36 @@
+# Landing page (SaaS-Accelerator)
+For the landing page and the related resources for a commercial landing page we are using the
+[SaaS-accelerator](https://github.com/Azure/Commercial-Marketplace-SaaS-Accelerator) provided by Microsoft.
+
+This is not integrated with terraform but the deployment is simple:
+
+1. Launch the installation script as defined [here](https://github.com/Azure/Commercial-Marketplace-SaaS-Accelerator/blob/main/docs/Installation-Instructions.md#basic-installation-script). You can see an example below:
+```powershell
+dotnet tool install --global dotnet-ef; `
+git clone https://github.com/Azure/Commercial-Marketplace-SaaS-Accelerator.git -b 7.0.0 --depth 1; `
+cd ./Commercial-Marketplace-SaaS-Accelerator/deployment; `
+.\Deploy.ps1 `
+ -WebAppNamePrefix "md-saas" `
+ -ResourceGroupForDeployment "md-saas" `
+ -PublisherAdminUsers "pedro.caldeira@movedigital.ch" `
+ -TenantID "9e365f01-61cb-4e8a-a1f4-cb26e28cda0b" `
+ -ADApplicationID "cfa8bbdd-e8e0-4d79-b0cf-5a6396e38e95" `
+ -ADApplicationSecret "<Application registration secret value>" `
+ -Location "Switzerland North"
+```
+2. The installation script will create and deploy the azure resources needed for the landing page (~10 mins)
+3. Once this is done, copy the urls and ids that the script will output e.g.
+```
+➡️ Landing Page section:       https://md-saas-portal.azurewebsites.net/
+➡️ Connection Webhook section: https://md-saas-portal.azurewebsites.net/api/AzureWebhook
+➡️ Tenant ID:                  9e365f01-61cb-4e8a-a1f4-cb26e28cda0b
+➡️ AAD Application ID section: cfa8bbdd-e8e0-4d79-b0cf-5a6396e38e95
+```
+4. These values should be transferred to the technical configuration of the microsoft partner center marketplace offer.
+5. Once the above is done, you can submit the offer for review, once the review is complete it should be possible to subscribe to an offer.
+
+---
+
 # Microsoft Commercial Marketplace - Community Code for SaaS Applications
 
 ![.NET Core](https://github.com/Azure/Commercial-Marketplace-SaaS-Accelerator/workflows/.NET%20Core/badge.svg)
